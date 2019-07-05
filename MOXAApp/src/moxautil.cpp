@@ -69,13 +69,12 @@ int main(int argc, char* argv[])
 	int ret, port = -1, port_id = -1;
 	double timeout = 1.0;
 
-    Sleep(10000);
     app.add_option("--ip,ip", moxa_ip_s, "MOXA IP Address")->mandatory();
     CLI::Option* pass_opt = app.add_option("--password", moxa_password_s, "MOXA Password");
     app.add_flag("--alive", alive, "Check moxa is alive");
     app.add_flag("--resetserver", reset_server, "Reset server")->needs(pass_opt);
-    app.add_flag("--timeout", timeout, "Timeout (s)");
-    CLI::Option* port_opt = app.add_option("--port", port, "moxa port to use");
+    app.add_flag("--timeout", timeout, "Timeout (s) to use for each command");
+    CLI::Option* port_opt = app.add_option("--port", port, "Moxa port to use (only works if port is in `TCP Server Mode`)");
     app.add_flag("--status", status, "Status")->needs(port_opt);
     app.add_flag("--resetport", reset_port, "Reset specific moxa port")->needs(port_opt)->needs(pass_opt);
 
